@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c52r1yv15qakh"]
+
+[ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="1_5lmqc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wp2ha")
+
+[node name="AttackRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.225, 0.275)
+texture = ExtResource("1_5lmqc")

@@ -10,6 +10,7 @@
 [node name="ground" type="StaticBody2D" parent="."]
 position = Vector2(557, 646)
 scale = Vector2(10, 10)
+collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="ground"]
 scale = Vector2(3, 0.05)
