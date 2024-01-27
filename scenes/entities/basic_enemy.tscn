@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=6 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
 [ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="1_5lmqc"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
+[ext_resource type="PackedScene" uid="uid://ctujvcxy8bbi4" path="res://scenes/visual_effects/blood_particles.tscn" id="4_g8kbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
 
@@ -22,10 +23,20 @@ texture = ExtResource("1_5lmqc")
 
 [node name="Health" parent="." instance=ExtResource("3_crsh2")]
 collision_layer = 4
+max_health = 20
 
 [node name="CollisionShape2D" parent="Health" index="0"]
 shape = SubResource("CapsuleShape2D_wp2ha")
 
+[node name="BloodParticles" parent="." instance=ExtResource("4_g8kbv")]
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="onDeath" from="Health" to="." method="_on_death"]
+[connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
+[connection signal="onDeath" from="Health" to="DeathTimer" method="start"]
+[connection signal="onTakeDamage" from="Health" to="BloodParticles" method="restart"]
+[connection signal="timeout" from="DeathTimer" to="." method="queue_free"]
 
 [editable path="Health"]

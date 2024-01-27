@@ -11,4 +11,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_death():
-	queue_free()
+	#queue_free()
+	pass
