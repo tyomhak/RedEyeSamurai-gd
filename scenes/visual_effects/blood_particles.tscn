@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctujvcxy8bbi4"]
+
+[ext_resource type="Texture2D" uid="uid://bp17u4p3nlpcp" path="res://data/effect_sprites/vecteezy_circulo-blanco-png_21115771.png" id="1_r7vvt"]
+
+[node name="BloodParticles" type="CPUParticles2D"]
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("1_r7vvt")
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 250.0
+initial_velocity_max = 450.0
+scale_amount_min = 0.2
+scale_amount_max = 0.6
+color = Color(0.810534, 0, 0.101376, 1)
