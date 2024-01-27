@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c24fijfuwe0yk"
-path="res://.godot/imported/run_0001.png-6df5e39a8361478f2275e6458f8cf78d.ctex"
+uid="uid://dm7ctyql5485x"
+path="res://.godot/imported/fall_0000.png-a87fa6c99c835ce51629f2e5d8659995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/sprites/run/run_0001.png"
-dest_files=["res://.godot/imported/run_0001.png-6df5e39a8361478f2275e6458f8cf78d.ctex"]
+source_file="res://data/sprites/stickman_sprites/fall/fall_0000.png"
+dest_files=["res://.godot/imported/fall_0000.png-a87fa6c99c835ce51629f2e5d8659995.ctex"]
 
 [params]
 

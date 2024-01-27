@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm7ctyql5485x"
-path="res://.godot/imported/fall_0000.png-dbdc76f569390a8a0a4999b421ab653d.ctex"
+uid="uid://dpkgb0qtukjjd"
+path="res://.godot/imported/attack-1_0000.png-ad7478937e598c5a96413d475126f8e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/sprites/fall/fall_0000.png"
-dest_files=["res://.godot/imported/fall_0000.png-dbdc76f569390a8a0a4999b421ab653d.ctex"]
+source_file="res://data/sprites/stickman_sprites/attack-1/attack-1_0000.png"
+dest_files=["res://.godot/imported/attack-1_0000.png-ad7478937e598c5a96413d475126f8e1.ctex"]
 
 [params]
 
