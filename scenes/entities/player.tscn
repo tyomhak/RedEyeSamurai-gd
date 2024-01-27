@@ -1,12 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://bapiqllidv4dq"]
+[gd_scene load_steps=31 format=3 uid="uid://d1jeje7pxrc1j"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
 [ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="2_kcvj0"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="3_5essf"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="4_nqlig"]
-
 [ext_resource type="Script" path="res://src/managers/level_manager.gd" id="5_jdtha"]
-
 [ext_resource type="Texture2D" uid="uid://rb5p80hlh5cy" path="res://data/sprites/stickman_sprites/run/run_0000.png" id="5_mwr1t"]
 [ext_resource type="Texture2D" uid="uid://dpkgb0qtukjjd" path="res://data/sprites/stickman_sprites/attack-1/attack-1_0000.png" id="5_uk26o"]
 [ext_resource type="Texture2D" uid="uid://c24fijfuwe0yk" path="res://data/sprites/stickman_sprites/run/run_0001.png" id="6_sj4e6"]
@@ -176,18 +174,16 @@ collision_layer = 2
 [node name="CollisionShape2D" parent="Health" index="0"]
 shape = SubResource("CapsuleShape2D_ocrxd")
 
-
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("5_jdtha")
-
-[connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
-[connection signal="onTakeDamage" from="Health" to="LevelManager" method="debug_print"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
 animation = &"hurt"
 
+[connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
+[connection signal="onTakeDamage" from="Health" to="LevelManager" method="debug_print"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 
 [editable path="SimpleAreaAttack"]
