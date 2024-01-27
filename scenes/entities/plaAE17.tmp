@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bapiqllidv4dq"]
+[gd_scene load_steps=24 format=3 uid="uid://bapiqllidv4dq"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
 [ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="2_kcvj0"]
@@ -12,19 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://b0r7p1p6fqrgx" path="res://data/sprites/stickman_sprites/attack-2/attack-2_0000.png" id="8_fksu7"]
 [ext_resource type="Texture2D" uid="uid://ynqgvm1tabs" path="res://data/sprites/stickman_sprites/attack-2/attack-2_0001.png" id="9_uqciy"]
 [ext_resource type="Texture2D" uid="uid://b6hywdh105ek0" path="res://data/sprites/stickman_sprites/attack-2/attack-2_0002.png" id="10_xpew3"]
-[ext_resource type="Texture2D" uid="uid://b2qphly554slw" path="res://data/sprites/stickman_sprites/death/death_0000.png" id="11_cvirg"]
 [ext_resource type="Texture2D" uid="uid://dm7ctyql5485x" path="res://data/sprites/stickman_sprites/fall/fall_0000.png" id="11_p1wxw"]
 [ext_resource type="Texture2D" uid="uid://r7eoi6m081gs" path="res://data/sprites/stickman_sprites/fall/fall_0001.png" id="12_e7a2q"]
-[ext_resource type="Texture2D" uid="uid://dwfq1tmjgklu2" path="res://data/sprites/stickman_sprites/death/death_0001.png" id="12_pvv4h"]
-[ext_resource type="Texture2D" uid="uid://bgd7fv3rbpbcx" path="res://data/sprites/stickman_sprites/death/death_0002.png" id="13_bk234"]
 [ext_resource type="Texture2D" uid="uid://cwujmc1gtmupv" path="res://data/sprites/stickman_sprites/idle/idle_0000.png" id="13_v7ap3"]
 [ext_resource type="Texture2D" uid="uid://cfqe7ocr81gbr" path="res://data/sprites/stickman_sprites/idle/idle_0001.png" id="14_7nu5t"]
-[ext_resource type="Texture2D" uid="uid://rbbj6j0i7sle" path="res://data/sprites/stickman_sprites/death/death_0003.png" id="14_ks1fw"]
 [ext_resource type="Texture2D" uid="uid://b61niauvlw1n3" path="res://data/sprites/stickman_sprites/idle/idle_0002.png" id="15_tp6ul"]
 [ext_resource type="Texture2D" uid="uid://vyr0pyke875m" path="res://data/sprites/stickman_sprites/idle/idle_0003.png" id="16_vkwby"]
 [ext_resource type="Texture2D" uid="uid://blo4atwtkhi1" path="res://data/sprites/stickman_sprites/jump/jump_0000.png" id="17_4lq6f"]
 [ext_resource type="Texture2D" uid="uid://2d77sundfjbx" path="res://data/sprites/stickman_sprites/jump/jump_0001.png" id="18_f74ob"]
-[ext_resource type="Texture2D" uid="uid://qkj8vvdxf0be" path="res://data/sprites/stickman_sprites/smoke/smoke_0000.png" id="25_h8ran"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocrxd"]
 
@@ -58,23 +53,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack-2",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_cvirg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_pvv4h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_bk234")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_ks1fw")
-}],
-"loop": true,
-"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -84,7 +62,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_e7a2q")
 }],
-"loop": false,
+"loop": true,
 "name": &"fall",
 "speed": 5.0
 }, {
@@ -112,7 +90,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("18_f74ob")
 }],
-"loop": false,
+"loop": true,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -125,14 +103,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("25_h8ran")
-}],
-"loop": true,
-"name": &"smoke",
 "speed": 5.0
 }]
 
@@ -168,7 +138,7 @@ shape = SubResource("CapsuleShape2D_ocrxd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
-animation = &"smoke"
+animation = &"idle"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 
