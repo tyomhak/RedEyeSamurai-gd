@@ -28,6 +28,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytn6i"]
+size = Vector2(40, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5havr"]
 animations = [{
@@ -145,6 +146,7 @@ collision_mask = 2
 damage_amount = 2
 
 [node name="CollisionShape2D" parent="AreaAttack" index="0"]
+position = Vector2(-4, -2)
 shape = SubResource("RectangleShape2D_ytn6i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -9,8 +9,9 @@ signal onJump
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
-@onready var simple_attack: AreaAttack = $SimpleAreaAttack
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var simple_attack: AreaAttack = $DirectionNode/SimpleAreaAttack
+@onready var _animated_sprite = $DirectionNode/AnimatedSprite2D
+@onready var flip_node: Node2D = $DirectionNode
 
 var target_vel: Vector2 = Vector2.ZERO
 
@@ -27,9 +28,14 @@ func _physics_process(delta):
 	handle_attack()
 	move_and_slide()
 
+	## Flip the character based on the movement direction
+	if velocity.x != 0:
+		var direction = sign(velocity.x)
+		flip_node.scale.x = abs(flip_node.scale.x) * direction
 
 func handle_movement():
 	var direction = Input.get_axis("left", "right")
+	
 	velocity.x = direction * hor_vel
 	if(_is_attacking): return
 	if(!is_on_floor()):

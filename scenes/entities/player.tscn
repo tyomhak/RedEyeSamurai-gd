@@ -154,14 +154,6 @@ jump_vel = -400.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ocrxd")
 
-[node name="SimpleAreaAttack" parent="." instance=ExtResource("3_5essf")]
-position = Vector2(13, 0)
-collision_mask = 4
-damage_amount = 10
-
-[node name="CollisionShape2D" parent="SimpleAreaAttack" index="0"]
-shape = SubResource("RectangleShape2D_w4ymv")
-
 [node name="Health" parent="." instance=ExtResource("4_nqlig")]
 collision_layer = 2
 
@@ -171,14 +163,23 @@ shape = SubResource("CapsuleShape2D_ocrxd")
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("5_jdtha")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="DirectionNode" type="Node2D" parent="."]
+
+[node name="SimpleAreaAttack" parent="DirectionNode" instance=ExtResource("3_5essf")]
+position = Vector2(13, 0)
+collision_mask = 4
+damage_amount = 10
+
+[node name="CollisionShape2D" parent="DirectionNode/SimpleAreaAttack" index="0"]
+shape = SubResource("RectangleShape2D_w4ymv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
 animation = &"idle"
 
 [connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
-[connection signal="onTakeDamage" from="Health" to="LevelManager" method="debug_print"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="DirectionNode/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 
-[editable path="SimpleAreaAttack"]
 [editable path="Health"]
+[editable path="DirectionNode/SimpleAreaAttack"]
