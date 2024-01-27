@@ -180,7 +180,7 @@ script = ExtResource("5_jdtha")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
-animation = &"hurt"
+animation = &"idle"
 
 [connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
 [connection signal="onTakeDamage" from="Health" to="LevelManager" method="debug_print"]

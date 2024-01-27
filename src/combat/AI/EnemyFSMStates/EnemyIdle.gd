@@ -1,16 +1,12 @@
-extends State
+extends EnemyState
 class_name EnemyIdle
-
 
 @export var visionRayCast: RayCast2D # = $PlayerDetectRaycast
 
-var charBody: BasicEnemy = null
-
 func enter():
 	super()
-	
-	charBody = get_parent().get_parent()
-	assert(charBody != null)
+	if anim:
+		anim.play("idle")
 	
 func update(_delta: float):
 	pass

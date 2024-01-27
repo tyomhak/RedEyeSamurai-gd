@@ -1,4 +1,4 @@
-extends State
+extends EnemyState
 class_name EnemyAttack
 
 @export var attackNode: AreaAttack = null
@@ -7,13 +7,8 @@ class_name EnemyAttack
 
 @onready var timer: Timer = $Timer
 
-var charBody: BasicEnemy = null
-
 func enter():
 	super()
-	
-	charBody = get_parent().get_parent()
-	assert(charBody != null)
 	timer.start()
 	hit_player()
 	
@@ -28,5 +23,6 @@ func update(_delta: float):
 		return transition_to("EnemyChasing")
 
 func hit_player():
+	anim.play("attack")
 	attackNode.attack()
 

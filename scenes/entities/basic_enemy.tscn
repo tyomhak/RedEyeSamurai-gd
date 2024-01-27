@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=27 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
-[ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="1_5lmqc"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
 [ext_resource type="PackedScene" uid="uid://ctujvcxy8bbi4" path="res://scenes/visual_effects/blood_particles.tscn" id="4_g8kbv"]
 [ext_resource type="Script" path="res://src/combat/AI/FSM/StateMachine.gd" id="5_hv7bc"]
@@ -10,10 +9,94 @@
 [ext_resource type="PackedScene" uid="uid://birem4h8acee" path="res://scenes/entities/enemy/enemy_states/EnemyAttack.tscn" id="8_mbtbf"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="9_861lg"]
 [ext_resource type="PackedScene" uid="uid://c81oyy8r8nnt1" path="res://scenes/entities/enemy/enemy_states/EnemyHurt.tscn" id="9_j670l"]
+[ext_resource type="Texture2D" uid="uid://dfc478aar12wh" path="res://data/sprites/stickman_enemy/attack/attack_0000.png" id="11_8ymtf"]
+[ext_resource type="Texture2D" uid="uid://c8kd2gs8ndjis" path="res://data/sprites/stickman_enemy/idle/idle_0000.png" id="11_tsr3p"]
+[ext_resource type="Texture2D" uid="uid://qp84p0l1plms" path="res://data/sprites/stickman_enemy/attack/attack_0001.png" id="12_g0epb"]
+[ext_resource type="Texture2D" uid="uid://psyir0vm4r1x" path="res://data/sprites/stickman_enemy/idle/idle_0001.png" id="12_rh526"]
+[ext_resource type="Texture2D" uid="uid://47sd1ps1yyh6" path="res://data/sprites/stickman_enemy/attack/attack_0002.png" id="13_a5qm5"]
+[ext_resource type="Texture2D" uid="uid://dlr5olqusp75i" path="res://data/sprites/stickman_enemy/idle/idle_0002.png" id="13_jkb58"]
+[ext_resource type="Texture2D" uid="uid://bm1lsw37a40ps" path="res://data/sprites/stickman_enemy/attack/attack_0003.png" id="14_aqyi5"]
+[ext_resource type="Texture2D" uid="uid://b4pimxi25mcap" path="res://data/sprites/stickman_enemy/idle/idle_0003.png" id="14_v4cxs"]
+[ext_resource type="Texture2D" uid="uid://dbo7je7qj05g1" path="res://data/sprites/stickman_enemy/run/run_0000.png" id="15_2fwol"]
+[ext_resource type="Texture2D" uid="uid://bpnr6u5074wpx" path="res://data/sprites/stickman_enemy/death/death_0000.png" id="15_3uvvr"]
+[ext_resource type="Texture2D" uid="uid://bmsvbggsti0m2" path="res://data/sprites/stickman_enemy/death/death_0001.png" id="16_bsddj"]
+[ext_resource type="Texture2D" uid="uid://dg1ld0xsggjlg" path="res://data/sprites/stickman_enemy/run/run_0001.png" id="16_r5plm"]
+[ext_resource type="Texture2D" uid="uid://utfj0iev6m0x" path="res://data/sprites/stickman_enemy/death/death_0002.png" id="17_igx4x"]
+[ext_resource type="Texture2D" uid="uid://bfu03d6xssfdl" path="res://data/sprites/stickman_enemy/hurt/hurt_0000.png" id="18_d3qwt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytn6i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5havr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_8ymtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_g0epb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a5qm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_aqyi5")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_3uvvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bsddj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_igx4x")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_d3qwt")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_tsr3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rh526")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jkb58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_v4cxs")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("15_2fwol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r5plm")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -24,10 +107,6 @@ shape = SubResource("CapsuleShape2D_wp2ha")
 
 [node name="AttackRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(50, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.225, 0.275)
-texture = ExtResource("1_5lmqc")
 
 [node name="Health" parent="." instance=ExtResource("3_crsh2")]
 collision_layer = 4
@@ -66,6 +145,11 @@ damage_amount = 2
 
 [node name="CollisionShape2D" parent="AreaAttack" index="0"]
 shape = SubResource("RectangleShape2D_ytn6i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.256, 0.256)
+sprite_frames = SubResource("SpriteFrames_5havr")
+animation = &"death"
 
 [connection signal="onDeath" from="Health" to="." method="_on_death"]
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]

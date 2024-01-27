@@ -1,24 +1,18 @@
-extends State
+extends EnemyState
 
 @export var run_speed: float = 200
 @export var attack_distance: float = 30
 @export var max_chase_distance: float = 400
-
-var charBody: BasicEnemy = null
+	
 
 func enter():
 	super()
-	
-	charBody = get_parent().get_parent()
-	assert(charBody != null)
-	
+	anim.play("run")
+
 func exit():
 	super()
 	charBody.velocity = Vector2.ZERO
 	charBody.move_and_slide()
-	
-func update(_delta: float):
-	pass
 	
 func phys_update(_delta: float):
 	super(_delta)
