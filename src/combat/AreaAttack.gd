@@ -7,6 +7,7 @@ signal onAttack
 
 func attack():
 	var targets = get_overlapping_areas()
+	print(targets.size())
 	if not targets.is_empty():
 		for target in targets:
 			if target.has_method("take_damage"):

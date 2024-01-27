@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://birem4h8acee"]
+
+[ext_resource type="Script" path="res://src/combat/AI/EnemyFSMStates/EnemyAttack.gd" id="1_r2a14"]
+
+[node name="EnemyAttack" type="Node"]
+script = ExtResource("1_r2a14")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="hit_player"]

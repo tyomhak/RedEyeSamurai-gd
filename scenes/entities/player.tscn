@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1jeje7pxrc1j"]
+[gd_scene load_steps=8 format=3 uid="uid://d1jeje7pxrc1j"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
 [ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="2_kcvj0"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="3_5essf"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="4_nqlig"]
+[ext_resource type="Script" path="res://src/managers/level_manager.gd" id="5_jdtha"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocrxd"]
 
@@ -11,7 +12,6 @@
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_prw26")
 hor_vel = 600.0
 jump_vel = -400.0
@@ -36,6 +36,12 @@ collision_layer = 2
 
 [node name="CollisionShape2D" parent="Health" index="0"]
 shape = SubResource("CapsuleShape2D_ocrxd")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("5_jdtha")
+
+[connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
+[connection signal="onTakeDamage" from="Health" to="LevelManager" method="debug_print"]
 
 [editable path="SimpleAreaAttack"]
 [editable path="Health"]

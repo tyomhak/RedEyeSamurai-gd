@@ -1,11 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=13 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
 [ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="1_5lmqc"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
 [ext_resource type="PackedScene" uid="uid://ctujvcxy8bbi4" path="res://scenes/visual_effects/blood_particles.tscn" id="4_g8kbv"]
+[ext_resource type="Script" path="res://src/combat/AI/FSM/StateMachine.gd" id="5_hv7bc"]
+[ext_resource type="PackedScene" uid="uid://b085ermere7ib" path="res://scenes/entities/enemy/enemy_states/EnemyIdle.tscn" id="6_4myh0"]
+[ext_resource type="PackedScene" uid="uid://dghbs3b8terpd" path="res://scenes/entities/enemy/enemy_states/EnemyChasing.tscn" id="7_ivxfk"]
+[ext_resource type="PackedScene" uid="uid://birem4h8acee" path="res://scenes/entities/enemy/enemy_states/EnemyAttack.tscn" id="8_mbtbf"]
+[ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="9_861lg"]
+[ext_resource type="PackedScene" uid="uid://c81oyy8r8nnt1" path="res://scenes/entities/enemy/enemy_states/EnemyHurt.tscn" id="9_j670l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytn6i"]
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -23,7 +31,7 @@ texture = ExtResource("1_5lmqc")
 
 [node name="Health" parent="." instance=ExtResource("3_crsh2")]
 collision_layer = 4
-max_health = 20
+max_health = 30
 
 [node name="CollisionShape2D" parent="Health" index="0"]
 shape = SubResource("CapsuleShape2D_wp2ha")
@@ -33,10 +41,39 @@ shape = SubResource("CapsuleShape2D_wp2ha")
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_hv7bc")
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyIdle" parent="FSM" node_paths=PackedStringArray("visionRayCast") instance=ExtResource("6_4myh0")]
+visionRayCast = NodePath("../../VisionRaycast")
+
+[node name="EnemyChasing" parent="FSM" instance=ExtResource("7_ivxfk")]
+
+[node name="EnemyAttack" parent="FSM" node_paths=PackedStringArray("attackNode") instance=ExtResource("8_mbtbf")]
+attackNode = NodePath("../../AreaAttack")
+
+[node name="EnemyHurt" parent="FSM" instance=ExtResource("9_j670l")]
+
+[node name="VisionRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(-100, 0)
+collision_mask = 2
+
+[node name="AreaAttack" parent="." instance=ExtResource("9_861lg")]
+position = Vector2(-22, 0)
+collision_mask = 2
+damage_amount = 2
+
+[node name="CollisionShape2D" parent="AreaAttack" index="0"]
+shape = SubResource("RectangleShape2D_ytn6i")
+
 [connection signal="onDeath" from="Health" to="." method="_on_death"]
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onDeath" from="Health" to="DeathTimer" method="start"]
+[connection signal="onDeath" from="Health" to="FSM" method="queue_free"]
 [connection signal="onTakeDamage" from="Health" to="BloodParticles" method="restart"]
+[connection signal="onTakeDamage" from="Health" to="FSM/EnemyHurt" method="force_interrupt"]
 [connection signal="timeout" from="DeathTimer" to="." method="queue_free"]
 
 [editable path="Health"]
+[editable path="AreaAttack"]

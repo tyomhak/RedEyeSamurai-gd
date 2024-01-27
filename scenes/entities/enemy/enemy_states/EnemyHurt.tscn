@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c81oyy8r8nnt1"]
+
+[ext_resource type="Script" path="res://src/combat/AI/EnemyFSMStates/EnemyHurt.gd" id="1_aopag"]
+
+[node name="EnemyHurt" type="Node"]
+script = ExtResource("1_aopag")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="on_hurt_finish"]

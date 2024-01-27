@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dghbs3b8terpd"]
+
+[ext_resource type="Script" path="res://src/combat/AI/EnemyFSMStates/EnemyChasing.gd" id="1_uesll"]
+
+[node name="EnemyChasing" type="Node"]
+script = ExtResource("1_uesll")
