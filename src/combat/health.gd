@@ -6,7 +6,7 @@ signal onHeal
 signal onDeath
 
 @export var max_health: int = 10
-var curr_health: int = max_health
+@onready var curr_health: int = max_health
 
 func take_damage(amount):
 	curr_health = max(0, curr_health - amount)
@@ -14,7 +14,6 @@ func take_damage(amount):
 		onDeath.emit()
 	else:
 		onTakeDamage.emit()
-	print(curr_health)
 
 func heal(amount):
 	if (curr_health < max_health):
