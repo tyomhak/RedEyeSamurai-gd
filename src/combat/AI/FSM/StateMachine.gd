@@ -28,16 +28,15 @@ func _physics_process(delta):
 func on_state_transition(state: State, new_state_name: String):
 	if (state != curr_state):
 		return
-		
-	on_force_state_transition(new_state_name)
+	_change_state_to(new_state_name)
 	
-	#var new_state = states.get(new_state_name.to_lower())
-	#if new_state:
-		#curr_state.exit()
-		#new_state.enter()
-		#curr_state = new_state
 	
 func on_force_state_transition(new_state_name: String):
+	if not curr_state.interruptible():
+		return
+	_change_state_to(new_state_name)
+
+func _change_state_to(new_state_name: String):
 	var new_state = states.get(new_state_name.to_lower())
 	if new_state:
 		curr_state.exit()

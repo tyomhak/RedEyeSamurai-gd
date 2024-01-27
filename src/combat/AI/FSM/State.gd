@@ -25,3 +25,7 @@ func transition_to(new_state_name: String):
 
 func force_transition_to(new_state_name: String):
 	onForceStateTransition.emit(new_state_name)
+	
+func interruptible() -> bool:
+	return true
+	

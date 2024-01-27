@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdynpihoeqi7d"]
+
+[ext_resource type="Script" path="res://src/combat/AI/EnemyFSMStates/EnemyDeath.gd" id="1_7ua5b"]
+
+[node name="EnemyDeath" type="Node"]
+script = ExtResource("1_7ua5b")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

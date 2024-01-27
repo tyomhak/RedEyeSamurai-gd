@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=28 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://birem4h8acee" path="res://scenes/entities/enemy/enemy_states/EnemyAttack.tscn" id="8_mbtbf"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="9_861lg"]
 [ext_resource type="PackedScene" uid="uid://c81oyy8r8nnt1" path="res://scenes/entities/enemy/enemy_states/EnemyHurt.tscn" id="9_j670l"]
+[ext_resource type="PackedScene" uid="uid://bdynpihoeqi7d" path="res://scenes/entities/enemy/enemy_states/EnemyDeath.tscn" id="9_uuk55"]
 [ext_resource type="Texture2D" uid="uid://dfc478aar12wh" path="res://data/sprites/stickman_enemy/attack/attack_0000.png" id="11_8ymtf"]
 [ext_resource type="Texture2D" uid="uid://c8kd2gs8ndjis" path="res://data/sprites/stickman_enemy/idle/idle_0000.png" id="11_tsr3p"]
 [ext_resource type="Texture2D" uid="uid://qp84p0l1plms" path="res://data/sprites/stickman_enemy/attack/attack_0001.png" id="12_g0epb"]
@@ -57,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_igx4x")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -117,9 +118,6 @@ shape = SubResource("CapsuleShape2D_wp2ha")
 
 [node name="BloodParticles" parent="." instance=ExtResource("4_g8kbv")]
 
-[node name="DeathTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_hv7bc")
 initial_state = NodePath("EnemyIdle")
@@ -133,6 +131,9 @@ visionRayCast = NodePath("../../VisionRaycast")
 attackNode = NodePath("../../AreaAttack")
 
 [node name="EnemyHurt" parent="FSM" instance=ExtResource("9_j670l")]
+duration = 0.5
+
+[node name="EnemyDeath" parent="FSM" instance=ExtResource("9_uuk55")]
 
 [node name="VisionRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(-100, 0)
@@ -151,13 +152,10 @@ scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_5havr")
 animation = &"death"
 
-[connection signal="onDeath" from="Health" to="." method="_on_death"]
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
-[connection signal="onDeath" from="Health" to="DeathTimer" method="start"]
-[connection signal="onDeath" from="Health" to="FSM" method="queue_free"]
+[connection signal="onDeath" from="Health" to="FSM/EnemyDeath" method="force_interrupt"]
 [connection signal="onTakeDamage" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onTakeDamage" from="Health" to="FSM/EnemyHurt" method="force_interrupt"]
-[connection signal="timeout" from="DeathTimer" to="." method="queue_free"]
 
 [editable path="Health"]
 [editable path="AreaAttack"]
