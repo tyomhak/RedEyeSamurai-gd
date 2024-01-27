@@ -5,3 +5,7 @@ func restart_level():
 
 func debug_print():
 	print("player_damaged")
+
+func _process(_delta):
+	if Input.is_action_just_pressed("restart"):
+		restart_level()
