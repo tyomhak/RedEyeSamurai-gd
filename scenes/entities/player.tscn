@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://d1jeje7pxrc1j"]
+[gd_scene load_steps=30 format=3 uid="uid://d1jeje7pxrc1j"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
-[ext_resource type="Texture2D" uid="uid://b5bgwx5qcq6c4" path="res://icon.svg" id="2_kcvj0"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="3_5essf"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="4_nqlig"]
 [ext_resource type="Script" path="res://src/managers/level_manager.gd" id="5_jdtha"]
@@ -151,11 +150,6 @@ collision_layer = 2
 script = ExtResource("1_prw26")
 hor_vel = 600.0
 jump_vel = -400.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.155, 0.23)
-texture = ExtResource("2_kcvj0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ocrxd")
