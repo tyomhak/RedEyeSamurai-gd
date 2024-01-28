@@ -135,6 +135,7 @@ initial_state = NodePath("EnemyIdle")
 raycastVision = NodePath("../../RaycastVision")
 
 [node name="EnemyChasing" parent="FSM" instance=ExtResource("7_ivxfk")]
+run_speed = 100.0
 
 [node name="EnemyAttack" parent="FSM" node_paths=PackedStringArray("attackNode") instance=ExtResource("8_mbtbf")]
 attackNode = NodePath("../../DirectionNode/AreaAttack")
@@ -158,7 +159,7 @@ shape = SubResource("RectangleShape2D_ytn6i")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_5havr")
-animation = &"attack"
+animation = &"idle"
 
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onDeath" from="Health" to="FSM/EnemyDeath" method="force_interrupt"]
