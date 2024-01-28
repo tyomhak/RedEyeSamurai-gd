@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d1jeje7pxrc1j"]
+[gd_scene load_steps=30 format=3 uid="uid://d1jeje7pxrc1j"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="3_5essf"]
@@ -26,8 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://vaa1fl570xyb" path="res://data/sprites/stickman_sprites/hurt/hurt_0000.png" id="17_uvt7e"]
 [ext_resource type="Texture2D" uid="uid://2d77sundfjbx" path="res://data/sprites/stickman_sprites/jump/jump_0001.png" id="18_f74ob"]
 [ext_resource type="Texture2D" uid="uid://qkj8vvdxf0be" path="res://data/sprites/stickman_sprites/smoke/smoke_0000.png" id="25_h8ran"]
-[ext_resource type="PackedScene" uid="uid://dw7icy48dsk56" path="res://scenes/audio/SoundQueue.tscn" id="27_sov1d"]
-[ext_resource type="AudioStream" uid="uid://dt5bbgbtrbw66" path="res://data/audio/swing/attack-1.ogg" id="27_wnd8k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocrxd"]
 
@@ -60,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("10_xpew3")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack-2",
 "speed": 10.0
 }, {
@@ -137,7 +135,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -151,12 +149,12 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_prw26")
-hor_vel = 220.0
+hor_vel = 350.0
 jump_vel = -400.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -50)
 zoom = Vector2(2, 2)
-process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
@@ -186,14 +184,7 @@ shape = SubResource("RectangleShape2D_w4ymv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
-animation = &"run"
-
-[node name="SoundQueue" parent="." instance=ExtResource("27_sov1d")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundQueue"]
-stream = ExtResource("27_wnd8k")
-volume_db = -10.0
-pitch_scale = 1.5
+animation = &"idle"
 
 [connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
 [connection signal="animation_finished" from="DirectionNode/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
