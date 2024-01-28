@@ -6,11 +6,15 @@ signal onJump
 @export var hor_vel: float = 10.0
 @export var jump_vel: float = 10.0
 
+@export var zoomin_speed: float = 10.0
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var simple_attack: AreaAttack = $DirectionNode/SimpleAreaAttack
 @onready var _animated_sprite = $DirectionNode/AnimatedSprite2D
 @onready var flip_node: Node2D = $DirectionNode
+@onready var cig_ctrlr: CigController = $DirectionNode/CigController
+@onready var cam: Camera2D = $Camera2D
 
 var target_vel: Vector2 = Vector2.ZERO
 
@@ -19,6 +23,9 @@ var _is_attacking = false
 var _can_attack = true
 const _attack_types = ["attack-1" , "attack-2"]
 var rng = RandomNumberGenerator.new()
+
+var _is_smoking = false
+var _target_zoom: Vector2 = Vector2(2,2)
 
 #sound
 var _swing_sounds
@@ -29,10 +36,16 @@ func _ready():
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
-
-	handle_movement()
-	handle_jump()
-	handle_attack()
+	
+	handle_smoking(delta)
+	
+	if _is_smoking:
+		velocity = Vector2.ZERO
+	else:
+		handle_movement()
+		handle_jump()
+		handle_attack()
+	
 	move_and_slide()
 
 	## Flip the character based on the movement direction
@@ -72,8 +85,30 @@ func handle_animation():
 		_animated_sprite.play("idle")
 	elif(velocity.x != 0):
 		_animated_sprite.play("run")
+
+
+func handle_smoking(delta):
+	if Input.is_action_just_pressed("smoke") and not _is_smoking:
+		smoke()
+	if cam.zoom.distance_to(_target_zoom) > 0.1:
+		cam.zoom = cam.zoom.slerp(_target_zoom, zoomin_speed * delta)
+	else:
+		cam.zoom = _target_zoom
+
+func smoke():
+	_is_smoking = true
+	_animated_sprite.play("smoke")
+	cig_ctrlr.smoke()
+	_target_zoom = Vector2(40,40)
 	
-func _on_animated_sprite_2d_animation_finished():
+func _on_smoke_finish():
+	_is_smoking = false
+	_target_zoom = Vector2(2,2)
+	
+
+func _on_animated_sprite_2d_animation_finished():	
 	if(_attack_types.has(_animated_sprite.animation)):
 		_can_attack = true
 		_is_attacking = false
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d1jeje7pxrc1j"]
+[gd_scene load_steps=36 format=3 uid="uid://d1jeje7pxrc1j"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_prw26"]
 [ext_resource type="PackedScene" uid="uid://chiww455qtoe7" path="res://scenes/combat/area_attack.tscn" id="3_5essf"]
@@ -28,6 +28,10 @@
 [ext_resource type="Texture2D" uid="uid://qkj8vvdxf0be" path="res://data/sprites/stickman_sprites/smoke/smoke_0000.png" id="25_h8ran"]
 [ext_resource type="PackedScene" uid="uid://dw7icy48dsk56" path="res://scenes/audio/SoundQueue.tscn" id="27_sov1d"]
 [ext_resource type="AudioStream" uid="uid://dt5bbgbtrbw66" path="res://data/audio/swing/attack-1.ogg" id="27_wnd8k"]
+[ext_resource type="Script" path="res://src/entities/player/CigController.gd" id="29_408ct"]
+[ext_resource type="AudioStream" uid="uid://b1wrafb4bab5a" path="res://data/audio/smoking/inhale.mp3" id="29_ji8wb"]
+[ext_resource type="PackedScene" uid="uid://qn5ct4aoptad" path="res://scenes/entities/magic_cig/magic_cig.tscn" id="30_1pjje"]
+[ext_resource type="AudioStream" uid="uid://bf4g5qot6a8v" path="res://data/audio/smoking/exhale.mp3" id="30_64vfn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocrxd"]
 
@@ -145,7 +149,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"smoke",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -155,6 +159,7 @@ hor_vel = 220.0
 jump_vel = -400.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -11)
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
@@ -186,7 +191,19 @@ shape = SubResource("RectangleShape2D_w4ymv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_3i2sl")
-animation = &"run"
+animation = &"smoke"
+
+[node name="CigController" type="Node2D" parent="DirectionNode"]
+position = Vector2(1, -12)
+script = ExtResource("29_408ct")
+cig = ExtResource("30_1pjje")
+inhale_sound = ExtResource("29_ji8wb")
+exhale_sound = ExtResource("30_64vfn")
+
+[node name="Timer" type="Timer" parent="DirectionNode/CigController"]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DirectionNode/CigController"]
 
 [node name="SoundQueue" parent="." instance=ExtResource("27_sov1d")]
 
@@ -197,6 +214,8 @@ pitch_scale = 1.5
 
 [connection signal="onDeath" from="Health" to="LevelManager" method="restart_level"]
 [connection signal="animation_finished" from="DirectionNode/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="onSmokeFinish" from="DirectionNode/CigController" to="." method="_on_smoke_finish"]
+[connection signal="timeout" from="DirectionNode/CigController/Timer" to="DirectionNode/CigController" method="stop_smoking"]
 
 [editable path="Health"]
 [editable path="DirectionNode/SimpleAreaAttack"]

@@ -47,17 +47,18 @@ animations = [{
 }]
 
 [node name="MagicCig" type="Node2D"]
+scale = Vector2(0.05, 0.05)
 script = ExtResource("1_nnkm0")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(63, -90)
+position = Vector2(155.032, -86)
 sprite_frames = SubResource("SpriteFrames_k54pf")
 animation = &"smoke"
-frame_progress = 0.876832
+frame_progress = 0.90106
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(92.032, 4.00002)
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_n0t6e")
 animation = &"burn"
-frame = 2
-frame_progress = 0.295649
+frame_progress = 0.891944
