@@ -105,6 +105,7 @@ animations = [{
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
+platform_floor_layers = 4294967281
 script = ExtResource("1_1a3v1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

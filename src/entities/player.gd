@@ -123,4 +123,9 @@ func _on_animated_sprite_2d_animation_finished():
 		_can_attack = true
 		_is_attacking = false
 
+func _on_death():
+	_animated_sprite.play("death")
+	set_process(false)
+	set_physics_process(false)
+	pass
 

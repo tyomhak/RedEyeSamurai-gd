@@ -21,6 +21,9 @@ func exit():
 func update(_delta: float):
 	super(_delta)
 	
+	if not charBody.player:
+		return transition_to("EnemyIdle")
+	
 	var to_target = charBody.to_local(charBody.player.global_position)
 	if (to_target.length() > attack_distance):
 		return transition_to("EnemyChasing")

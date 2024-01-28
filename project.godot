@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="D:/dev/Godot Projs/RED_EYE_SAMURAI_BUILD/rec/a.avi"
+
 [input]
 
 left={

@@ -17,6 +17,9 @@ func exit():
 func phys_update(_delta: float):
 	super(_delta)
 	
+	if not charBody.player:
+		return transition_to("EnemyIdle")
+	
 	var to_target =  charBody.to_local(charBody.player.global_position)
 	var distance_to_target = to_target.length()
 	
