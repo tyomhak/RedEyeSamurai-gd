@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://qn5ct4aoptad"]
+
+[ext_resource type="Script" path="res://scenes/entities/magic_cig/magic_cig.gd" id="1_nnkm0"]
+[ext_resource type="Texture2D" uid="uid://cvgac6261qmku" path="res://data/sprites/smoke/smoke-01.png" id="2_sh83t"]
+[ext_resource type="Texture2D" uid="uid://eebrbpipbbkp" path="res://data/sprites/smoke/smoke-02.png" id="3_e2426"]
+[ext_resource type="Texture2D" uid="uid://db0uf755q5nio" path="res://data/sprites/magic_cig/magic_cig (5).png" id="4_bq28l"]
+[ext_resource type="Texture2D" uid="uid://dm0udh5japkvs" path="res://data/sprites/magic_cig/magic_cig (1).png" id="5_cdmux"]
+[ext_resource type="Texture2D" uid="uid://dpn7bifyun22g" path="res://data/sprites/magic_cig/magic_cig (2).png" id="6_68jdu"]
+[ext_resource type="Texture2D" uid="uid://d3kwr7yf7irao" path="res://data/sprites/magic_cig/magic_cig (3).png" id="7_ulxwh"]
+[ext_resource type="Texture2D" uid="uid://bejfg7hwlqo3f" path="res://data/sprites/magic_cig/magic_cig (4).png" id="8_k784n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k54pf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sh83t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e2426")
+}],
+"loop": true,
+"name": &"smoke",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0t6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bq28l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cdmux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_68jdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ulxwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k784n")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 5.0
+}]
+
+[node name="MagicCig" type="Node2D"]
+script = ExtResource("1_nnkm0")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(63, -90)
+sprite_frames = SubResource("SpriteFrames_k54pf")
+animation = &"smoke"
+frame_progress = 0.876832
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.256, 0.256)
+sprite_frames = SubResource("SpriteFrames_n0t6e")
+animation = &"burn"
+frame = 2
+frame_progress = 0.295649
