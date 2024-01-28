@@ -150,7 +150,7 @@ duration = 0.5
 [node name="AreaAttack" parent="DirectionNode" instance=ExtResource("9_861lg")]
 position = Vector2(20, 0)
 collision_mask = 2
-damage_amount = 2
+damage_amount = 4
 
 [node name="CollisionShape2D" parent="DirectionNode/AreaAttack" index="0"]
 position = Vector2(-4, -2)

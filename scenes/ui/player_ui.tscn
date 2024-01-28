@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgfg2v4gx6m64"]
+
+[ext_resource type="Texture2D" uid="uid://jhwa3rl4v0nr" path="res://data/sprites/eyes/red-eyes-01.png" id="1_tjbw5"]
+[ext_resource type="Script" path="res://src/UI/ui_eye_controller.gd" id="1_tnogn"]
+[ext_resource type="Texture2D" uid="uid://bp17u4p3nlpcp" path="res://data/effect_sprites/vecteezy_circulo-blanco-png_21115771.png" id="2_rq1mt"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -141.0
+offset_right = 216.0
+grow_vertical = 0
+script = ExtResource("1_tnogn")
+
+[node name="WhiteLeft" type="TextureRect" parent="Control2/Control"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+offset_left = 13.0
+offset_top = 24.0
+offset_right = 107.0
+offset_bottom = 120.0
+texture = ExtResource("2_rq1mt")
+
+[node name="WhiteRight" type="TextureRect" parent="Control2/Control"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+offset_left = 106.0
+offset_top = 26.0
+offset_right = 200.0
+offset_bottom = 122.0
+texture = ExtResource("2_rq1mt")
+
+[node name="RedLeft" type="TextureRect" parent="Control2/Control"]
+modulate = Color(0.803922, 0, 0.0666667, 0.227451)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+offset_left = 13.0
+offset_top = 24.0
+offset_right = 107.0
+offset_bottom = 120.0
+texture = ExtResource("2_rq1mt")
+
+[node name="RedRight" type="TextureRect" parent="Control2/Control"]
+modulate = Color(0.803922, 0, 0.0666667, 0.227451)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+offset_left = 106.0
+offset_top = 26.0
+offset_right = 200.0
+offset_bottom = 122.0
+texture = ExtResource("2_rq1mt")
+
+[node name="SKIN" type="TextureRect" parent="Control2/Control"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 11.0
+offset_right = 197.0
+offset_bottom = 129.0
+texture = ExtResource("1_tjbw5")

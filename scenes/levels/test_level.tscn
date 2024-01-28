@@ -21,7 +21,7 @@ offset = Vector2(0, 31.105)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground"]
 shape = SubResource("WorldBoundaryShape2D_1xd74")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_8evrw")]
+[node name="Player" parent="." instance=ExtResource("1_8evrw")]
 position = Vector2(165, 580)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("3_bxijv")]

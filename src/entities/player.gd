@@ -15,6 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var flip_node: Node2D = $DirectionNode
 @onready var cig_ctrlr: CigController = $DirectionNode/CigController
 @onready var cam: Camera2D = $Camera2D
+@onready var health: Health = $Health
 
 var target_vel: Vector2 = Vector2.ZERO
 
@@ -100,6 +101,7 @@ func smoke():
 	_animated_sprite.play("smoke")
 	cig_ctrlr.smoke()
 	_target_zoom = Vector2(50,50)
+	health.heal(3)
 	
 func _on_smoke_finish():
 	_is_smoking = false
