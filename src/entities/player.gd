@@ -99,7 +99,7 @@ func smoke():
 	_is_smoking = true
 	_animated_sprite.play("smoke")
 	cig_ctrlr.smoke()
-	_target_zoom = Vector2(40,40)
+	_target_zoom = Vector2(50,50)
 	
 func _on_smoke_finish():
 	_is_smoking = false

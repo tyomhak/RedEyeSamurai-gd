@@ -157,6 +157,7 @@ collision_layer = 2
 script = ExtResource("1_prw26")
 hor_vel = 220.0
 jump_vel = -400.0
+zoomin_speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -11)

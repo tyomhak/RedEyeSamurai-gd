@@ -1,11 +1,9 @@
 extends Node2D
 
+@onready var cig: AnimatedSprite2D = $AnimatedSprite2D
+@onready var smoke: AnimatedSprite2D = $AnimatedSprite2D2
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	cig.play("burn")
+	smoke.play("smoke")
