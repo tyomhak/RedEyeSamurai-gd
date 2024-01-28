@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgfg2v4gx6m64"]
+[gd_scene load_steps=6 format=3 uid="uid://bgfg2v4gx6m64"]
 
 [ext_resource type="Texture2D" uid="uid://jhwa3rl4v0nr" path="res://data/sprites/eyes/red-eyes-01.png" id="1_tjbw5"]
 [ext_resource type="Script" path="res://src/UI/ui_eye_controller.gd" id="1_tnogn"]
+[ext_resource type="Texture2D" uid="uid://bejfg7hwlqo3f" path="res://data/sprites/magic_cig/magic_cig (4).png" id="1_wsw2k"]
+[ext_resource type="Texture2D" uid="uid://db0uf755q5nio" path="res://data/sprites/magic_cig/magic_cig (5).png" id="2_248rt"]
 [ext_resource type="Texture2D" uid="uid://bp17u4p3nlpcp" path="res://data/effect_sprites/vecteezy_circulo-blanco-png_21115771.png" id="2_rq1mt"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -69,3 +71,13 @@ offset_top = 11.0
 offset_right = 197.0
 offset_bottom = 129.0
 texture = ExtResource("1_tjbw5")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 719.0
+offset_bottom = 200.0
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(30, 30)
+min_value = -1.0
+max_value = 5.0
+texture_under = ExtResource("1_wsw2k")
+texture_progress = ExtResource("2_248rt")
