@@ -29,5 +29,6 @@ func phys_update(_delta: float):
 	charBody.velocity = direction * run_speed
 	charBody.velocity.y = 0
 	
+	charBody.look_direction(direction)
 	charBody.move_and_slide()
 	pass

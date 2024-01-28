@@ -19,10 +19,13 @@ func exit():
 func update(_delta: float):
 	super(_delta)
 	
-	if (charBody.to_local(charBody.player.global_position).length() > attack_distance):
+	var to_target = charBody.to_local(charBody.player.global_position)
+	if (to_target.length() > attack_distance):
 		return transition_to("EnemyChasing")
 
 func hit_player():
+	var to_target = charBody.to_local(charBody.player.global_position)
+	charBody.look_direction(to_target)
 	anim.play("attack")
 	attackNode.attack()
 
