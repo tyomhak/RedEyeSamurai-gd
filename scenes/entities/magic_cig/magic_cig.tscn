@@ -55,7 +55,7 @@ script = ExtResource("1_nnkm0")
 position = Vector2(155.032, -86)
 sprite_frames = SubResource("SpriteFrames_k54pf")
 animation = &"smoke"
-frame_progress = 0.958077
+frame_progress = 0.686618
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(92.032, 4.00002)

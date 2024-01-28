@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b74jj8wrj4pw"]
+
+[ext_resource type="PackedScene" uid="uid://dmu5iv6ysbgjh" path="res://scenes/items/pickup_item.tscn" id="1_asp0h"]
+[ext_resource type="Texture2D" uid="uid://db0uf755q5nio" path="res://data/sprites/magic_cig/magic_cig (5).png" id="2_qxxgp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycsks"]
+
+[node name="joint_pickup" instance=ExtResource("1_asp0h")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_ycsks")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+scale = Vector2(0.032, 0.032)
+texture = ExtResource("2_qxxgp")
+
+[connection signal="area_entered" from="." to="." method="_on_item_found"]

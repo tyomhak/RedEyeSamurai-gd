@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=31 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://dg1ld0xsggjlg" path="res://data/sprites/stickman_enemy/run/run_0001.png" id="16_r5plm"]
 [ext_resource type="Texture2D" uid="uid://utfj0iev6m0x" path="res://data/sprites/stickman_enemy/death/death_0002.png" id="17_igx4x"]
 [ext_resource type="Texture2D" uid="uid://bfu03d6xssfdl" path="res://data/sprites/stickman_enemy/hurt/hurt_0000.png" id="18_d3qwt"]
+[ext_resource type="PackedScene" uid="uid://bsfu1og65n7y3" path="res://scenes/items/item_dropper.tscn" id="26_8rgxa"]
+[ext_resource type="PackedScene" uid="uid://b74jj8wrj4pw" path="res://scenes/items/joint_pickup.tscn" id="27_0o1a0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
 
@@ -161,8 +163,13 @@ scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_5havr")
 animation = &"idle"
 
+[node name="ItemDropper" parent="." instance=ExtResource("26_8rgxa")]
+itemScene = ExtResource("27_0o1a0")
+dropChance = 0.5
+
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onDeath" from="Health" to="FSM/EnemyDeath" method="force_interrupt"]
+[connection signal="onDeath" from="Health" to="ItemDropper" method="drop_item"]
 [connection signal="onTakeDamage" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onTakeDamage" from="Health" to="FSM/EnemyHurt" method="force_interrupt"]
 

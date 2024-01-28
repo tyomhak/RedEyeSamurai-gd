@@ -25,7 +25,9 @@ var _can_attack = true
 const _attack_types = ["attack-1" , "attack-2"]
 var rng = RandomNumberGenerator.new()
 
-var _is_smoking = false
+
+var _joint_count:int = 0
+var _is_smoking:bool = false
 var _target_zoom: Vector2 = Vector2(2,2)
 
 #sound
@@ -89,7 +91,8 @@ func handle_animation():
 
 
 func handle_smoking(delta):
-	if Input.is_action_just_pressed("smoke") and not _is_smoking:
+	if Input.is_action_just_pressed("smoke") and _joint_count > 0 and not _is_smoking:
+		print("joint count: ", _joint_count)
 		smoke()
 	if cam.zoom.distance_to(_target_zoom) > 0.1:
 		cam.zoom = cam.zoom.slerp(_target_zoom, zoomin_speed * delta)
@@ -98,6 +101,7 @@ func handle_smoking(delta):
 
 func smoke():
 	_is_smoking = true
+	_joint_count -= 1
 	_animated_sprite.play("smoke")
 	cig_ctrlr.smoke()
 	_target_zoom = Vector2(50,50)
@@ -107,6 +111,8 @@ func _on_smoke_finish():
 	_is_smoking = false
 	_target_zoom = Vector2(2,2)
 	
+func _on_joint_found():
+	_joint_count += 1
 
 func _on_animated_sprite_2d_animation_finished():	
 	if(_attack_types.has(_animated_sprite.animation)):
