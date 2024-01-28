@@ -24,8 +24,11 @@ shape = SubResource("WorldBoundaryShape2D_1xd74")
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_8evrw")]
 position = Vector2(165, 580)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(575, 326)
-
 [node name="BasicEnemy" parent="." instance=ExtResource("3_bxijv")]
 position = Vector2(436, 570)
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("3_bxijv")]
+position = Vector2(635, 570)
+
+[node name="BasicEnemy3" parent="." instance=ExtResource("3_bxijv")]
+position = Vector2(781, 570)

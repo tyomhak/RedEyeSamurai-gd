@@ -30,7 +30,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocrxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4ymv"]
-size = Vector2(37, 20)
+size = Vector2(55, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3i2sl"]
 animations = [{
@@ -135,7 +135,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -149,8 +149,14 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_prw26")
-hor_vel = 600.0
+hor_vel = 350.0
 jump_vel = -400.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -50)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ocrxd")
@@ -172,7 +178,7 @@ collision_mask = 4
 damage_amount = 10
 
 [node name="CollisionShape2D" parent="DirectionNode/SimpleAreaAttack" index="0"]
-position = Vector2(-2.5, 0)
+position = Vector2(1.5, -1)
 shape = SubResource("RectangleShape2D_w4ymv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
