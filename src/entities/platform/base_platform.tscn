@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b12bw7nkgan0n"]
+
+[ext_resource type="Texture2D" uid="uid://coelbeiytylr7" path="res://data/textures/ground/ground-tile-01.png" id="1_kylcm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gufqr"]
+size = Vector2(64, 63)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kylcm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gufqr")
