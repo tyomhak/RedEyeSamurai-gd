@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hg3eatmqqrw2"]
+
+[ext_resource type="Script" path="res://src/entities/RaycastVision.gd" id="1_smyr2"]
+
+[node name="RaycastVision" type="Node2D"]
+script = ExtResource("1_smyr2")

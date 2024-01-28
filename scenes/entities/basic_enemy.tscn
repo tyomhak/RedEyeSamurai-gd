@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://c52r1yv15qakh"]
+[gd_scene load_steps=29 format=3 uid="uid://c52r1yv15qakh"]
 
 [ext_resource type="Script" path="res://src/entities/basic_enemy.gd" id="1_1a3v1"]
 [ext_resource type="PackedScene" uid="uid://pj4lgwaib02r" path="res://scenes/combat/health.tscn" id="3_crsh2"]
+[ext_resource type="PackedScene" uid="uid://hg3eatmqqrw2" path="res://scenes/combat/raycast_vision.tscn" id="3_i15tw"]
 [ext_resource type="PackedScene" uid="uid://ctujvcxy8bbi4" path="res://scenes/visual_effects/blood_particles.tscn" id="4_g8kbv"]
 [ext_resource type="Script" path="res://src/combat/AI/FSM/StateMachine.gd" id="5_hv7bc"]
 [ext_resource type="PackedScene" uid="uid://b085ermere7ib" path="res://scenes/entities/enemy/enemy_states/EnemyIdle.tscn" id="6_4myh0"]
@@ -28,7 +29,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp2ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytn6i"]
-size = Vector2(40, 34)
+size = Vector2(20, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5havr"]
 animations = [{
@@ -45,7 +46,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("14_aqyi5")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -107,9 +108,6 @@ script = ExtResource("1_1a3v1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wp2ha")
 
-[node name="AttackRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(50, 0)
-
 [node name="Health" parent="." instance=ExtResource("3_crsh2")]
 collision_layer = 4
 max_health = 30
@@ -117,42 +115,50 @@ max_health = 30
 [node name="CollisionShape2D" parent="Health" index="0"]
 shape = SubResource("CapsuleShape2D_wp2ha")
 
+[node name="RaycastVision" parent="." instance=ExtResource("3_i15tw")]
+
+[node name="RaycastRight" type="RayCast2D" parent="RaycastVision"]
+target_position = Vector2(200, 0)
+collision_mask = 3
+
+[node name="RaycastLeft" type="RayCast2D" parent="RaycastVision"]
+target_position = Vector2(-200, 0)
+collision_mask = 3
+
 [node name="BloodParticles" parent="." instance=ExtResource("4_g8kbv")]
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_hv7bc")
 initial_state = NodePath("EnemyIdle")
 
-[node name="EnemyIdle" parent="FSM" node_paths=PackedStringArray("visionRayCast") instance=ExtResource("6_4myh0")]
-visionRayCast = NodePath("../../VisionRaycast")
+[node name="EnemyIdle" parent="FSM" node_paths=PackedStringArray("raycastVision") instance=ExtResource("6_4myh0")]
+raycastVision = NodePath("../../RaycastVision")
 
 [node name="EnemyChasing" parent="FSM" instance=ExtResource("7_ivxfk")]
 
 [node name="EnemyAttack" parent="FSM" node_paths=PackedStringArray("attackNode") instance=ExtResource("8_mbtbf")]
-attackNode = NodePath("../../AreaAttack")
+attackNode = NodePath("../../DirectionNode/AreaAttack")
 
 [node name="EnemyHurt" parent="FSM" instance=ExtResource("9_j670l")]
 duration = 0.5
 
 [node name="EnemyDeath" parent="FSM" instance=ExtResource("9_uuk55")]
 
-[node name="VisionRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(-100, 0)
-collision_mask = 2
+[node name="DirectionNode" type="Node2D" parent="."]
 
-[node name="AreaAttack" parent="." instance=ExtResource("9_861lg")]
-position = Vector2(-22, 0)
+[node name="AreaAttack" parent="DirectionNode" instance=ExtResource("9_861lg")]
+position = Vector2(20, 0)
 collision_mask = 2
 damage_amount = 2
 
-[node name="CollisionShape2D" parent="AreaAttack" index="0"]
+[node name="CollisionShape2D" parent="DirectionNode/AreaAttack" index="0"]
 position = Vector2(-4, -2)
 shape = SubResource("RectangleShape2D_ytn6i")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionNode"]
 scale = Vector2(0.256, 0.256)
 sprite_frames = SubResource("SpriteFrames_5havr")
-animation = &"death"
+animation = &"attack"
 
 [connection signal="onDeath" from="Health" to="BloodParticles" method="restart"]
 [connection signal="onDeath" from="Health" to="FSM/EnemyDeath" method="force_interrupt"]
@@ -160,4 +166,4 @@ animation = &"death"
 [connection signal="onTakeDamage" from="Health" to="FSM/EnemyHurt" method="force_interrupt"]
 
 [editable path="Health"]
-[editable path="AreaAttack"]
+[editable path="DirectionNode/AreaAttack"]

@@ -1,7 +1,8 @@
 extends EnemyState
 class_name EnemyIdle
 
-@export var visionRayCast: RayCast2D # = $PlayerDetectRaycast
+#@export var visionRayCast: RayCast2D # = $PlayerDetectRaycast
+@export var raycastVision: RaycastVision = null
 
 func enter():
 	super()
@@ -17,8 +18,17 @@ func phys_update(_delta: float):
 	charBody.velocity = charBody.velocity.lerp(Vector2.ZERO, 0.5)
 	charBody.move_and_slide()
 	
-	var target = visionRayCast.get_collider()
-	#print(target)
-	if target and target is PlayerController:
+	var target = get_target()
+	if target:
 		charBody.player = target
 		transition_to("EnemyChasing")
+
+func get_target() -> PlayerController:
+	var targets = raycastVision.get_target()
+	for target in targets:
+		if target is PlayerController:
+			return target
+			
+	return null
+		
+	
