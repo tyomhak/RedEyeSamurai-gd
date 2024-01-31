@@ -220,6 +220,7 @@ pitch_scale = 1.5
 
 [connection signal="onJointCountChange" from="." to="CanvasLayer/TextureProgressBar" method="set_value"]
 [connection signal="onDeath" from="Health" to="." method="_on_death"]
+[connection signal="onDeath" from="Health" to="Health" method="queue_free"]
 [connection signal="onHealthChange" from="Health" to="CanvasLayer/Control2/Control" method="set_percent"]
 [connection signal="animation_finished" from="DirectionNode/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="onSmokeFinish" from="DirectionNode/CigController" to="." method="_on_smoke_finish"]
